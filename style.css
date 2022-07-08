@@ -4,6 +4,7 @@ body {
   padding: 0;
   margin: 0;
   background-color: #464646;
+  overflow-x: hidden;
 }
 
 *,
@@ -26,9 +27,13 @@ h1 {
   text-align: center;
 }
 
-.witcherLogoContainer {
+.witcherLogo {
   width: 350px;
   margin: 0 auto;
+  transition: transform 200ms ease-in-out;
+}
+.witcherLogo:hover {
+  transform: scale(1.1);
 }
 
 /* Footer Part */
@@ -41,6 +46,9 @@ footer {
 .footerLink {
   color: #00cfc3;
   text-decoration: none;
+}
+.footerLink:hover {
+  text-decoration: underline;
 }
 
 /* Main Part */

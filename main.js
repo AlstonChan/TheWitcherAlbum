@@ -1,5 +1,29 @@
 import "./style.css";
 
+function updateUI() {
+  const parentCard = document.querySelectorAll("picture-card");
+  for (const node of parentCard) {
+    if (state.activeNum == node.getAttribute("data-num")) {
+      node.shadowRoot.querySelector("img").classList.add("isActive");
+      node.shadowRoot.querySelector(".container").classList.add("isActive");
+    } else {
+      node.shadowRoot.querySelector("img").classList.remove("isActive");
+      node.shadowRoot.querySelector(".container").classList.remove("isActive");
+    }
+  }
+}
+
+const activeCard = { activeNum: "3" };
+const handler = {
+  set(obj, prop, value) {
+    obj[prop] = value;
+    updateUI();
+    return Reflect.set(...arguments);
+  },
+};
+
+const state = new Proxy(activeCard, handler);
+
 const template = document.createElement("template");
 template.innerHTML = `
       <style>
@@ -80,13 +104,20 @@ class PictureCard extends HTMLElement {
   }
 
   toggleExpand(e) {
-    console.log(e);
+    if (e.target.dataset.num == state.activeNum) return;
+    if (e.target.dataset.num != state.activeNum) {
+      state.activeNum = this.getAttribute("data-num");
+    }
   }
 
   connectedCallback() {
     this.shadowRoot
       .querySelector(".cardDet")
       .addEventListener("click", (e) => this.toggleExpand(e));
+    if (this.getAttribute("data-num") == state.activeNum) {
+      this.shadowRoot.querySelector("img").classList.add("isActive");
+      this.shadowRoot.querySelector(".container").classList.add("isActive");
+    }
   }
   disconnectedCallback() {
     this.shadowRoot.querySelector(".card").removeEventListener();
