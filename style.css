@@ -1,0 +1,88 @@
+/* CSS Setup */
+html,
+body {
+  padding: 0;
+  margin: 0;
+  background-color: #464646;
+}
+
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
+/* Header Part */
+header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+h1 {
+  color: #ffe600;
+  font-size: 2.8rem;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  text-align: center;
+}
+
+.witcherLogoContainer {
+  width: 350px;
+  margin: 0 auto;
+}
+
+/* Footer Part */
+footer {
+  color: #fff;
+  font-family: "Lucida Console", "Courier New", Courier, monospace;
+  text-align: center;
+}
+
+.footerLink {
+  color: #00cfc3;
+  text-decoration: none;
+}
+
+/* Main Part */
+.mainContent {
+  padding: 1rem 4%;
+  margin: 0 auto;
+  width: fit-content;
+}
+
+.card {
+  position: relative;
+  display: inline-block;
+  appearance: none;
+  border: none;
+  background: none;
+  outline: none;
+  margin: 4px;
+  transition: transform 200ms ease-in-out;
+}
+.card:hover {
+  transform: scale(1.1);
+  border-radius: 10px;
+  box-shadow: 8px 8px 13px #00cfc3, -8px -8px 13px #00cfc3;
+  z-index: 20;
+}
+
+.navBtn {
+  appearance: none;
+  border: none;
+  background: none;
+  vertical-align: middle;
+  padding: 1rem;
+  cursor: pointer;
+  transition: transform 160ms ease-in-out;
+}
+.navBtn:hover {
+  transform: scale(1.1);
+}
+
+.rightBtn {
+  transform: rotate(180deg);
+}
+.rightBtn:hover {
+  transform: rotate(180deg) scale(1.1);
+}
