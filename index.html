@@ -9,7 +9,6 @@
   <body>
     <header>
       <h1>TheWitcherAlbum</h1>
-
       <a
         href="https://www.thewitcher.com/en/witcher3"
         referrerpolicy="no-referrer"
@@ -22,69 +21,75 @@
     </header>
     <main>
       <div class="mainContent">
-        <button class="navBtn">
+        <button class="navBtn" id="leftNav">
           <img src="nav.svg" alt="" />
         </button>
-        <picture-card
-          src-des="content/20220305110413_1.webp"
-          pic="20220305110413_1.webp"
-          desc="Geralt warming his hand"
-          obj-pos="65%"
-          class="card"
-          data-num="1"
-        ></picture-card>
-        <picture-card
-          src-des="content/20220305100518_1.webp"
-          pic="content/20220305100518_1.webp"
-          desc="Ciri Facing Wild Hunt soldier"
-          obj-pos="23%"
-          class="card"
-          data-num="2"
-        ></picture-card>
-        <picture-card
-          src-des="content/20220109223242_1.webp"
-          pic="content/20220109223242_1.webp"
-          desc="Geralt with Ciri"
-          obj-pos="54%"
-          class="card"
-          data-num="3"
-        ></picture-card>
-        <!-- <picture-card
-          src-des="content/20220109223208_1.webp"
-          pic="content/20220109223208_1.webp"
-          desc="Geralt with Ciri sitting on a clif"
-          obj-pos="69%"
-        ></picture-card>
-        <picture-card
-          src-des="content/20220116085253_1.webp"
-          pic="content/20220116085253_1.webp"
-          desc="Triss"
-          obj-pos="53%"
-        ></picture-card> -->
-        <picture-card
-          src-des="content/20220104093508_1.webp"
-          pic="content/20220104093508_1.webp"
-          desc="Holy Tree"
-          obj-pos="70%"
-          class="card"
-          data-num="4"
-        ></picture-card>
-        <picture-card
-          src-des="content/20211226093232_1.webp"
-          pic="content/20211226093232_1.webp"
-          desc="Wild Hunt Eredin burning village"
-          obj-pos="45%"
-          class="card"
-          data-num="5"
-        ></picture-card>
-        <button class="navBtn rightBtn">
+        <div class="cardHolder">
+          <picture-card
+            src-des="content/20220305110413_1.webp"
+            pic="20220305110413_1.webp"
+            desc="Geralt warming his hand"
+            obj-pos="65%"
+            class="card"
+            data-num="1"
+          ></picture-card>
+          <picture-card
+            src-des="content/20220305100518_1.webp"
+            pic="content/20220305100518_1.webp"
+            desc="Ciri Facing Wild Hunt soldier"
+            obj-pos="23%"
+            class="card"
+            data-num="2"
+          ></picture-card>
+          <picture-card
+            src-des="content/20220109223242_1.webp"
+            pic="content/20220109223242_1.webp"
+            desc="Geralt with Ciri"
+            obj-pos="54%"
+            class="card"
+            data-num="3"
+          ></picture-card>
+          <picture-card
+            src-des="content/20220104093508_1.webp"
+            pic="content/20220104093508_1.webp"
+            desc="Holy Tree"
+            obj-pos="70%"
+            class="card"
+            data-num="4"
+          ></picture-card>
+          <picture-card
+            src-des="content/20211226093232_1.webp"
+            pic="content/20211226093232_1.webp"
+            desc="Wild Hunt Eredin burning village"
+            obj-pos="45%"
+            class="card"
+            data-num="5"
+          ></picture-card>
+          <!-- <picture-card
+            src-des="content/20220109223208_1.webp"
+            pic="content/20220109223208_1.webp"
+            desc="Geralt with Ciri sitting on a clif"
+            obj-pos="69%"
+            class="card"
+            data-num="6"
+          ></picture-card>
+          <picture-card
+            src-des="content/20220116085253_1.webp"
+            pic="content/20220116085253_1.webp"
+            desc="Triss"
+            obj-pos="53%"
+            class="card"
+            data-num="7"
+          ></picture-card> -->
+        </div>
+        <button class="navBtn rightBtn" id="rightNav">
           <img src="nav.svg" alt="" />
         </button>
       </div>
     </main>
     <footer>
       <p class="copyright">Made by AlstonChan</p>
-      <p class="builtWith">
+      <p class="builtWith rythm fontColor2">
         Bundled using
         <a
           href="https://vitejs.dev/"
@@ -102,9 +107,5 @@
       </p>
     </footer>
     <script type="module" src="/main.js"></script>
-    <script
-      type="text/javascript"
-      src="https://cdnjs.cloudflare.com/ajax/libs/rythm.js/2.2.5/rythm.min.js"
-    ></script>
   </body>
 </html>

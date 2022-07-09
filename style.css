@@ -18,6 +18,9 @@ header {
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
+  width: fit-content;
+  margin: 0 auto;
 }
 
 h1 {
@@ -53,20 +56,31 @@ footer {
 
 /* Main Part */
 .mainContent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   padding: 1rem 4%;
   margin: 0 auto;
-  width: fit-content;
+  width: 100vw;
+  max-width: 2560px;
+}
+
+.cardHolder {
+  display: flex;
+  justify-content: center;
+  width: 100%;
 }
 
 .card {
   position: relative;
   display: inline-block;
+  width: 20%;
   appearance: none;
   border: none;
   background: none;
   outline: none;
   margin: 4px;
-  transition: transform 200ms ease-in-out;
+  transition: transform 200ms ease-in-out, width 200ms ease-in-out;
 }
 .card:hover {
   transform: scale(1.1);
@@ -93,4 +107,8 @@ footer {
 }
 .rightBtn:hover {
   transform: rotate(180deg) scale(1.1);
+}
+
+.isActive {
+  width: 55%;
 }

@@ -1,19 +1,19 @@
 import "./style.css";
 
+const parentCard = document.querySelectorAll("picture-card");
 function updateUI() {
-  const parentCard = document.querySelectorAll("picture-card");
   for (const node of parentCard) {
     if (state.activeNum == node.getAttribute("data-num")) {
-      node.shadowRoot.querySelector("img").classList.add("isActive");
+      node.classList.add("isActive");
       node.shadowRoot.querySelector(".container").classList.add("isActive");
     } else {
-      node.shadowRoot.querySelector("img").classList.remove("isActive");
+      node.classList.remove("isActive");
       node.shadowRoot.querySelector(".container").classList.remove("isActive");
     }
   }
 }
 
-const activeCard = { activeNum: "3" };
+const activeCard = { activeNum: Math.ceil(parentCard.length / 2) };
 const handler = {
   set(obj, prop, value) {
     obj[prop] = value;
@@ -21,7 +21,6 @@ const handler = {
     return Reflect.set(...arguments);
   },
 };
-
 const state = new Proxy(activeCard, handler);
 
 const template = document.createElement("template");
@@ -29,7 +28,6 @@ template.innerHTML = `
       <style>
         .cardDet{
           position: relative; 
-          width: fit-content; 
           display: inline-block;
           appearance: none;
           border: none;
@@ -44,21 +42,19 @@ template.innerHTML = `
           border-radius: 10px;
           box-shadow: 8px 8px 13px #00cfc3,
                       -8px -8px 13px #00cfc3;
-          z-index: 20;
         }
         .cardImg {
-          width: 200px;
+          width: 100%;
           height: 500px;
           object-fit: cover;
           object-position: center;
           border-radius: 10px;
           vertical-align: middle;
-          transition: width 200ms ease-in-out
         }
         .container {
           display: inline-block;
           position: absolute;
-          z-index: 10;
+          z-index: 1;
           top: 0;
           left: 0;
           width: 100%;
@@ -70,7 +66,6 @@ template.innerHTML = `
           background-color: rgb(0,0,0,0.31);
         }
         .isActive {
-          width: 600px;
           background: none;
         }
       </style> 
@@ -115,7 +110,7 @@ class PictureCard extends HTMLElement {
       .querySelector(".cardDet")
       .addEventListener("click", (e) => this.toggleExpand(e));
     if (this.getAttribute("data-num") == state.activeNum) {
-      this.shadowRoot.querySelector("img").classList.add("isActive");
+      this.classList.add("isActive");
       this.shadowRoot.querySelector(".container").classList.add("isActive");
     }
   }
