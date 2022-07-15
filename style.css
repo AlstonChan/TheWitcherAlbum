@@ -62,32 +62,35 @@ footer {
   padding: 1rem 4%;
   margin: 0 auto;
   width: 100vw;
-  max-width: 2560px;
+  max-width: 4560px;
 }
 
 .cardHolder {
-  display: flex;
-  justify-content: center;
+  position: relative;
   width: 100%;
+  white-space: nowrap;
+  overflow-x: hidden;
+  font-size: 0;
+  height: 610px;
 }
 
 .card {
   position: relative;
   display: inline-block;
-  width: 20%;
   appearance: none;
   border: none;
   background: none;
   outline: none;
-  margin: 4px;
-  transition: transform 200ms ease-in-out, width 200ms ease-in-out;
+  padding: 4px;
+  transition: transform 200ms ease-in-out, margin 500ms ease-in-out;
+  font-size: 0;
 }
-.card:hover {
+/* .card:hover {
   transform: scale(1.1);
   border-radius: 10px;
   box-shadow: 8px 8px 13px #00cfc3, -8px -8px 13px #00cfc3;
   z-index: 20;
-}
+} */
 
 .navBtn {
   appearance: none;

@@ -1,9 +1,11 @@
 import "./style.css";
 
+// ================== //
+// current active picture state
 const parentCard = document.querySelectorAll("picture-card");
 function updateUI() {
   for (const node of parentCard) {
-    if (state.activeNum == node.getAttribute("data-num")) {
+    if (activePicture.activeNum == node.getAttribute("data-num")) {
       node.classList.add("isActive");
       node.shadowRoot.querySelector(".container").classList.add("isActive");
     } else {
@@ -13,16 +15,103 @@ function updateUI() {
   }
 }
 
-const activeCard = { activeNum: Math.ceil(parentCard.length / 2) };
-const handler = {
-  set(obj, prop, value) {
-    obj[prop] = value;
-    updateUI();
-    return Reflect.set(...arguments);
-  },
-};
-const state = new Proxy(activeCard, handler);
+// state
+const activePicture = new Proxy(
+  { activeNum: Math.ceil(parentCard.length / 2) },
+  {
+    set(obj, prop, value) {
+      obj[prop] = value;
+      updateUI();
+      return Reflect.set(...arguments);
+    },
+  }
+);
 
+// ================== //
+// number of picture card can be shown on screen
+const resizeEvent = () => {
+  if (window.innerWidth > 2100) {
+    if (onScreenCard.num == 7) return;
+    onScreenCard.num = 7;
+  } else if (window.innerWidth > 1440) {
+    if (onScreenCard.num == 5) return;
+    onScreenCard.num = 5;
+  } else if (window.innerWidth > 600) {
+    if (onScreenCard.num == 3) return;
+    onScreenCard.num = 3;
+  } else if (window.innerWidth <= 600) {
+    if (onScreenCard.num == 1) return;
+    onScreenCard.num = 1;
+  }
+};
+window.addEventListener("resize", resizeEvent);
+
+function updateCardNum() {
+  const parentCard = document.querySelectorAll("picture-card");
+  for (const node of parentCard) {
+    if (parentCard[Math.floor(onScreenCard.num / 2)] == node) {
+      node.shadowRoot.querySelector("img").style.height = "600px";
+      console.log(node);
+      node.style.width = `${(100 / onScreenCard.num) * 2}%`;
+    } else {
+      node.shadowRoot.querySelector("img").style.height = "";
+      node.style.width = `${
+        (100 - (100 / onScreenCard.num) * 2) / (onScreenCard.num - 1)
+      }%`;
+    }
+  }
+}
+
+// state
+const onScreenCard = new Proxy(
+  { num: 0 },
+  {
+    set(obj, prop, value) {
+      obj[prop] = value;
+      updateCardNum();
+      return Reflect.set(...arguments);
+    },
+  }
+);
+
+// image corousel
+const leftNavBtn = document.getElementById("leftNav");
+const rightNavBtn = document.getElementById("rightNav");
+
+const handleImgCarousel = (e) => {
+  const parentNode = document.getElementById("cardHolder");
+
+  if (e.currentTarget.getAttribute("id") === "rightNav") {
+    parentNode.firstElementChild.style.marginLeft = `-${
+      (100 - (100 / onScreenCard.num) * 2) / (onScreenCard.num - 1)
+    }%`;
+    const firstElementChild = parentNode.firstElementChild.cloneNode(true);
+    setTimeout(() => {
+      firstElementChild.style.marginLeft = `0`;
+      parentNode.removeChild(parentNode.firstElementChild);
+      parentNode.insertBefore(firstElementChild, null);
+      updateCardNum();
+    }, 500);
+  }
+
+  if (e.currentTarget.getAttribute("id") === "leftNav") {
+    const lastElementChild = parentNode.lastElementChild.cloneNode(true);
+    lastElementChild.style.marginLeft = `-${
+      (100 - (100 / onScreenCard.num) * 2) / (onScreenCard.num - 1)
+    }%`;
+    parentNode.insertBefore(lastElementChild, parentNode.firstElementChild);
+    parentNode.removeChild(parentNode.lastElementChild);
+    setTimeout(() => {
+      parentNode.firstElementChild.style.marginLeft = `0`;
+      updateCardNum();
+    }, 150);
+  }
+};
+
+leftNavBtn.addEventListener("click", handleImgCarousel);
+rightNavBtn.addEventListener("click", handleImgCarousel);
+
+// Web Component
 const template = document.createElement("template");
 template.innerHTML = `
       <style>
@@ -37,12 +126,12 @@ template.innerHTML = `
           margin: 0;
           transition: transform 200ms ease-in-out
         }
-        .cardDet:hover {
-          transform: scale(1.1);
-          border-radius: 10px;
-          box-shadow: 8px 8px 13px #00cfc3,
-                      -8px -8px 13px #00cfc3;
-        }
+        // .cardDet:hover {
+        //   transform: scale(1.1);
+        //   border-radius: 10px;
+        //   box-shadow: 8px 8px 13px #00cfc3,
+        //               -8px -8px 13px #00cfc3;
+        // }
         .cardImg {
           width: 100%;
           height: 500px;
@@ -99,9 +188,9 @@ class PictureCard extends HTMLElement {
   }
 
   toggleExpand(e) {
-    if (e.target.dataset.num == state.activeNum) return;
-    if (e.target.dataset.num != state.activeNum) {
-      state.activeNum = this.getAttribute("data-num");
+    if (e.target.dataset.num == activePicture.activeNum) return;
+    if (e.target.dataset.num != activePicture.activeNum) {
+      activePicture.activeNum = this.getAttribute("data-num");
     }
   }
 
@@ -109,14 +198,19 @@ class PictureCard extends HTMLElement {
     this.shadowRoot
       .querySelector(".cardDet")
       .addEventListener("click", (e) => this.toggleExpand(e));
-    if (this.getAttribute("data-num") == state.activeNum) {
+    if (this.getAttribute("data-num") == activePicture.activeNum) {
       this.classList.add("isActive");
       this.shadowRoot.querySelector(".container").classList.add("isActive");
     }
   }
   disconnectedCallback() {
-    this.shadowRoot.querySelector(".card").removeEventListener();
+    this.shadowRoot
+      .querySelector(".cardDet")
+      .removeEventListener("click", (e) => this.toggleExpand(e));
   }
 }
 
 customElements.define("picture-card", PictureCard);
+
+// initialize
+resizeEvent();
