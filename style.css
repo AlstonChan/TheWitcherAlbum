@@ -45,6 +45,17 @@ footer {
   font-family: "Lucida Console", "Courier New", Courier, monospace;
   text-align: center;
 }
+.copyright {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.copyright > a {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  align-items: center;
+}
 
 .footerLink {
   color: #00cfc3;
@@ -71,7 +82,7 @@ footer {
   white-space: nowrap;
   overflow-x: hidden;
   font-size: 0;
-  height: 610px;
+  margin: auto 0;
 }
 
 .card {
@@ -82,15 +93,10 @@ footer {
   background: none;
   outline: none;
   padding: 4px;
-  transition: transform 200ms ease-in-out, margin 500ms ease-in-out;
+  transition: transform 200ms ease-in-out, margin 500ms ease-in-out,
+    width 300ms ease-out;
   font-size: 0;
 }
-/* .card:hover {
-  transform: scale(1.1);
-  border-radius: 10px;
-  box-shadow: 8px 8px 13px #00cfc3, -8px -8px 13px #00cfc3;
-  z-index: 20;
-} */
 
 .navBtn {
   appearance: none;
@@ -110,8 +116,4 @@ footer {
 }
 .rightBtn:hover {
   transform: rotate(180deg) scale(1.1);
-}
-
-.isActive {
-  width: 55%;
 }
