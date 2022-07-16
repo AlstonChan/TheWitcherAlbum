@@ -48,6 +48,7 @@ footer {
 .copyright {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   justify-content: center;
 }
 .copyright > a {
@@ -63,6 +64,9 @@ footer {
 }
 .footerLink:hover {
   text-decoration: underline;
+}
+.builtWith {
+  padding: 0 10px;
 }
 
 /* Main Part */
@@ -116,4 +120,44 @@ footer {
 }
 .rightBtn:hover {
   transform: rotate(180deg) scale(1.1);
+}
+
+@media screen and (max-width: 650px) {
+  h1 {
+    font-size: 2.3rem;
+  }
+  .witcherLogo {
+    width: 300px;
+  }
+
+  .mainContent {
+    padding: 0.5rem 1%;
+  }
+  .navBtn {
+    padding: 0.3rem;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  h1 {
+    font-size: 1.8rem;
+  }
+  .witcherLogo {
+    width: 230px;
+  }
+
+  .mainContent {
+    padding: 0;
+  }
+  .navBtn {
+    padding: 0.3rem;
+    position: absolute;
+    z-index: 10;
+  }
+  .leftBtn {
+    left: 0;
+  }
+  .rightBtn {
+    right: 0;
+  }
 }

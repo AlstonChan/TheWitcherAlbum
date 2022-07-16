@@ -34,7 +34,7 @@ template.innerHTML = `
         // }
         .cardImg {
           width: 100%;
-          height: 500px;
+          height: 350px;
           object-fit: cover;
           object-position: center;
           border-radius: 10px;
@@ -46,6 +46,16 @@ template.innerHTML = `
           border-radius: 10px;
           box-shadow:  7px 0px 5px #00cfc3, -7px 0px 5px #00cfc3;
           cursor: pointer;
+        }
+        @media screen and (min-width:2100px) {
+          .cardImg {
+            height: 550px;
+          }
+        }
+        @media screen and (min-width:1440px) {
+          .cardImg {
+            height: 450px;
+          }
         }
       </style> 
 

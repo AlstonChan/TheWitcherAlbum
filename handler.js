@@ -6,15 +6,12 @@ export const resizeEvent = () => {
   if (window.innerWidth > 2100) {
     if (onScreenCard.num == 7) return;
     onScreenCard.num = 7;
-  } else if (window.innerWidth > 1440) {
+  } else if (window.innerWidth >= 1440) {
     if (onScreenCard.num == 5) return;
     onScreenCard.num = 5;
-  } else if (window.innerWidth > 600) {
+  } else if (window.innerWidth < 1440) {
     if (onScreenCard.num == 3) return;
     onScreenCard.num = 3;
-  } else if (window.innerWidth <= 600) {
-    if (onScreenCard.num == 1) return;
-    onScreenCard.num = 1;
   }
 };
 window.addEventListener("resize", resizeEvent);
@@ -24,7 +21,11 @@ function updateCardNum() {
   for (const node of parentCard) {
     // if the img card IS in the middle
     if (parentCard[Math.floor(onScreenCard.num / 2)] == node) {
-      node.shadowRoot.querySelector("img").style.height = "600px";
+      if (onScreenCard.num > 5) {
+        node.shadowRoot.querySelector("img").style.height = "650px";
+      } else if (onScreenCard.num > 3) {
+        node.shadowRoot.querySelector("img").style.height = "550px";
+      } else node.shadowRoot.querySelector("img").style.height = "450px";
       node.style.width = `${(100 / onScreenCard.num) * 2}%`;
       node.shadowRoot.querySelector("img").classList.add("isActive");
     } else {
