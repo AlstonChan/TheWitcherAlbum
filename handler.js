@@ -51,12 +51,27 @@ const onScreenCard = new Proxy(
   }
 );
 
+// ================== //
+// cooldown for nav btn
+// state
+const navBtnCooldown = new Proxy(
+  { onCooldown: false },
+  {
+    set(obj, prop, value) {
+      obj[prop] = value;
+      return Reflect.set(...arguments);
+    },
+  }
+);
+
 // image corousel
 const leftNavBtn = document.getElementById("leftNav");
 const rightNavBtn = document.getElementById("rightNav");
 
 const handleImgCarousel = (e) => {
   const parentNode = document.getElementById("cardHolder");
+  if (navBtnCooldown.onCooldown) return;
+  navBtnCooldown.onCooldown = true;
 
   if (e.currentTarget.getAttribute("id") === "rightNav") {
     parentNode.firstElementChild.style.marginLeft = `-${
@@ -68,6 +83,7 @@ const handleImgCarousel = (e) => {
       parentNode.removeChild(parentNode.firstElementChild);
       parentNode.insertBefore(firstElementChild, null);
       updateCardNum();
+      navBtnCooldown.onCooldown = false;
     }, 500);
   }
 
@@ -81,6 +97,7 @@ const handleImgCarousel = (e) => {
     setTimeout(() => {
       parentNode.firstElementChild.style.marginLeft = `0`;
       updateCardNum();
+      navBtnCooldown.onCooldown = false;
     }, 150);
   }
 };
