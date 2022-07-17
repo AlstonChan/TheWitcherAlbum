@@ -1,3 +1,4 @@
+import "../style.css";
 import { resizeEvent } from "./handler";
 import pictureArr from "./pictureArr";
 
@@ -26,12 +27,6 @@ template.innerHTML = `
           margin: 0;
           transition: transform 200ms ease-in-out
         }
-        // .cardDet:hover {
-        //   transform: scale(1.1);
-        //   border-radius: 10px;
-        //   box-shadow: 8px 8px 13px #00cfc3,
-        //               -8px -8px 13px #00cfc3;
-        // }
         .cardImg {
           width: 100%;
           height: 350px;
@@ -44,9 +39,13 @@ template.innerHTML = `
         .isActive {
           filter: saturate(100%);
           border-radius: 10px;
-          box-shadow:  7px 0px 5px #00cfc3, -7px 0px 5px #00cfc3;
           cursor: pointer;
+          transition: box-shadow 160ms ease-in-out
         }
+        .isActive:hover {
+          box-shadow:  7px 0px 5px #00cfc3, -7px 0px 5px #00cfc3;
+        }
+        
         @media screen and (min-width:2100px) {
           .cardImg {
             height: 550px;
@@ -73,11 +72,9 @@ template.innerHTML = `
 class PictureCard extends HTMLElement {
   constructor() {
     super();
-
-    this.open = false;
-
     this.attachShadow({ mode: "open" });
     this.shadowRoot.appendChild(template.content.cloneNode(true));
+
     this.shadowRoot.querySelector("source").srcset = this.getAttribute("pic");
     this.shadowRoot.querySelector("img").src = this.getAttribute("pic");
     this.shadowRoot.querySelector("img").alt = this.getAttribute("desc");

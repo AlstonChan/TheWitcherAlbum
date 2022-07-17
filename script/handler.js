@@ -1,5 +1,6 @@
-import "./style.css";
+import "../style.css";
 
+// picture-card.js
 // ================== //
 // number of picture card can be shown on screen
 export const resizeEvent = () => {
@@ -16,6 +17,15 @@ export const resizeEvent = () => {
 };
 window.addEventListener("resize", resizeEvent);
 
+const handleActiveImg = (e) => {
+  const modal = document.createElement("picture-modal");
+  modal.setAttribute("pic", e.target.getAttribute("pic"));
+  modal.setAttribute("desc", e.target.getAttribute("desc"));
+  document.querySelector("main").appendChild(modal);
+
+  toggleFullImg.open = true;
+};
+
 function updateCardNum() {
   const parentCard = document.querySelectorAll("picture-card");
   for (const node of parentCard) {
@@ -28,6 +38,7 @@ function updateCardNum() {
       } else node.shadowRoot.querySelector("img").style.height = "450px";
       node.style.width = `${(100 / onScreenCard.num) * 2}%`;
       node.shadowRoot.querySelector("img").classList.add("isActive");
+      node.addEventListener("click", handleActiveImg);
     } else {
       // if the img card IS NOT in the middle
       node.shadowRoot.querySelector("img").style.height = "";
@@ -36,6 +47,7 @@ function updateCardNum() {
       }%`;
       node.classList.remove("isActive");
       node.shadowRoot.querySelector("img").classList.remove("isActive");
+      node.removeEventListener("click", handleActiveImg);
     }
   }
 }
@@ -105,3 +117,37 @@ const handleImgCarousel = (e) => {
 
 leftNavBtn.addEventListener("click", handleImgCarousel);
 rightNavBtn.addEventListener("click", handleImgCarousel);
+
+// picture-modal.js
+// ================== //
+// toggle fullscreen image
+const fullImgBtn = () => {
+  if (toggleFullImg.open) {
+    const pictureModal = document.querySelector("picture-modal");
+    const btn = pictureModal.shadowRoot.getElementById("cancelFullScreen");
+    btn.removeEventListener("click", fullImgBtn);
+    pictureModal.parentNode.removeChild(pictureModal);
+    toggleFullImg.open = false;
+  }
+};
+
+const triggerFullImg = () => {
+  if (toggleFullImg.open) {
+    const btn = document
+      .querySelector("picture-modal")
+      .shadowRoot.getElementById("cancelFullScreen");
+    btn.addEventListener("click", fullImgBtn);
+  }
+};
+
+// state
+const toggleFullImg = new Proxy(
+  { open: false },
+  {
+    set(obj, prop, value) {
+      obj[prop] = value;
+      triggerFullImg();
+      return Reflect.set(...arguments);
+    },
+  }
+);
