@@ -111,7 +111,7 @@ const handleImgCarousel = (e) => {
       parentNode.firstElementChild.style.marginLeft = `0`;
       updateCardNum();
       navBtnCooldown.onCooldown = false;
-    }, 150);
+    }, 225);
   }
 };
 
