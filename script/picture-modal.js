@@ -1,6 +1,5 @@
 import "../style.css";
 import { resizeEvent } from "./handler";
-import pictureArr from "./pictureArr";
 
 // Web Component
 const template = document.createElement("template");
