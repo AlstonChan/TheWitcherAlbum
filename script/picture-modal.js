@@ -37,12 +37,13 @@ template.innerHTML = `
       <div class="modalContainer">
         <div class="modal">
             <picture>
-            <source srcset="" type="image/webp" />
-            <img
+              <source srcset="" type="image/avif" />
+              <source srcset="" type="image/webp" />
+              <img
                 src=""
                 alt=""
                 class="modalImg"
-            />
+              />
             </picture>
         </div>
         <button id="cancelFullScreen">
@@ -58,8 +59,13 @@ class PictureModal extends HTMLElement {
   }
 
   connectedCallback() {
-    this.shadowRoot.querySelector("source").srcset = this.getAttribute("pic");
-    this.shadowRoot.querySelector("img").src = this.getAttribute("pic");
+    const sourceImg = this.shadowRoot.querySelectorAll("source");
+    sourceImg.forEach((node) => {
+      const attr = node.getAttribute("type");
+      if (attr === "image/avif") node.srcset = this.getAttribute("avif");
+      if (attr === "image/webp") node.srcset = this.getAttribute("webp");
+    });
+    this.shadowRoot.querySelector("img").src = this.getAttribute("jpg");
     this.shadowRoot.querySelector("img").alt = this.getAttribute("desc");
   }
 }

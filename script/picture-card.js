@@ -5,7 +5,10 @@ import pictureArr from "./pictureArr";
 const cardHolder = document.getElementById("cardHolder");
 for (const pic of pictureArr) {
   const pictureCardElement = document.createElement("picture-card");
-  pictureCardElement.setAttribute("pic", pic.picSrc);
+  pictureCardElement.setAttribute("jpg", pic.jpg);
+  pictureCardElement.setAttribute("webp", pic.webp);
+  pictureCardElement.setAttribute("avif", pic.avif);
+
   pictureCardElement.setAttribute("desc", pic.desc);
   pictureCardElement.setAttribute("obj-pos", pic.objPos);
   pictureCardElement.classList.add("card");
@@ -43,7 +46,8 @@ template.innerHTML = `
           transition: box-shadow 160ms ease-in-out
         }
         .isActive:hover {
-          box-shadow:  7px 0px 5px #00cfc3, -7px 0px 5px #00cfc3;
+          box-shadow:  2px 4px 22px 8px rgba(0, 207, 195, 0.5);
+-webkit-box-shadow:  2px 4px 22px 8px rgba(0, 207, 195, 0.5);
         }
         
         @media screen and (min-width:2100px) {
@@ -60,6 +64,7 @@ template.innerHTML = `
 
       <div class="cardDet">
         <picture>
+          <source srcset="" type="image/avif" />
           <source srcset="" type="image/webp" />
           <img
             src=""
@@ -75,8 +80,13 @@ class PictureCard extends HTMLElement {
     this.attachShadow({ mode: "open" });
     this.shadowRoot.appendChild(template.content.cloneNode(true));
 
-    this.shadowRoot.querySelector("source").srcset = this.getAttribute("pic");
-    this.shadowRoot.querySelector("img").src = this.getAttribute("pic");
+    const sourceImg = this.shadowRoot.querySelectorAll("source");
+    sourceImg.forEach((node) => {
+      const attr = node.getAttribute("type");
+      if (attr === "image/avif") node.srcset = this.getAttribute("avif");
+      if (attr === "image/webp") node.srcset = this.getAttribute("webp");
+    });
+    this.shadowRoot.querySelector("img").src = this.getAttribute("jpg");
     this.shadowRoot.querySelector("img").alt = this.getAttribute("desc");
     this.shadowRoot.querySelector("img").style.objectPosition =
       this.getAttribute("obj-pos");

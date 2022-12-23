@@ -19,7 +19,10 @@ window.addEventListener("resize", resizeEvent);
 
 const handleActiveImg = (e) => {
   const modal = document.createElement("picture-modal");
-  modal.setAttribute("pic", e.target.getAttribute("pic"));
+  modal.setAttribute("jpg", e.target.getAttribute("jpg"));
+  modal.setAttribute("webp", e.target.getAttribute("webp"));
+  modal.setAttribute("avif", e.target.getAttribute("avif"));
+
   modal.setAttribute("desc", e.target.getAttribute("desc"));
   document.querySelector("main").appendChild(modal);
 
