@@ -80,7 +80,7 @@ const navBtnCooldown = new Proxy(
   }
 );
 
-// image corousel
+// image carousel
 const leftNavBtn = document.getElementById("leftNav");
 const rightNavBtn = document.getElementById("rightNav");
 
@@ -112,9 +112,12 @@ const handleImgCarousel = (e) => {
     parentNode.removeChild(parentNode.lastElementChild);
     setTimeout(() => {
       parentNode.firstElementChild.style.marginLeft = `0`;
+    }, 0);
+    setTimeout(() => {
+      // parentNode.firstElementChild.style.marginLeft = `0`;
       updateCardNum();
       navBtnCooldown.onCooldown = false;
-    }, 225);
+    }, 500);
   }
 };
 

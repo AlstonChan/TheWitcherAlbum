@@ -1,13 +1,24 @@
 {
   "name": "thewitcheralbum",
+  "description": "An album made with Web Component bundled with Vite",
   "private": true,
   "version": "0.0.0",
+  "license": "MIT",
+  "author": {
+    "name": "Chan Alston",
+    "email": "devalston390@gmail.com",
+    "url": "https://www.chanalston.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AlstonChan/TheWitcherAlbum"
+  },
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview"
   },
   "devDependencies": {
-    "vite": "^4.0.3"
+    "vite": "^4.4.9"
   }
 }

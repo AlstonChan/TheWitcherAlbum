@@ -3,7 +3,7 @@ const pictureArr = [
     jpg: "content/pic-1/1.jpg",
     webp: "content/pic-1/1.webp",
     avif: "content/pic-1/1.avif",
-    desc: "Geralt with Ciri sitting on a clif",
+    desc: "Geralt with Ciri sitting on a cliff",
     objPos: "54%",
   },
   {

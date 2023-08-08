@@ -23,6 +23,11 @@ template.innerHTML = `
           right: 15px;
           width: 50px;
           cursor: pointer;
+
+          transition: transform 160ms ease-in-out;
+        }
+        button:hover {
+          transform: scale(1.05);
         }
 
         @media screen and (max-width: 450px) {
