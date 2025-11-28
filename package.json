@@ -6,7 +6,7 @@
   "license": "MIT",
   "author": {
     "name": "Chan Alston",
-    "email": "devalston390@gmail.com",
+    "email": "hello@chanalston.com",
     "url": "https://www.chanalston.com"
   },
   "repository": {
@@ -19,6 +19,6 @@
     "preview": "vite preview"
   },
   "devDependencies": {
-    "vite": "^5.3.2"
+    "vite": "^5.4.21"
   }
 }
